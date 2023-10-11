@@ -13,7 +13,8 @@ fetch('https://striveschool-api.herokuapp.com/books')
         <div class="card-body">
           <h5 class="card-title">${book.price}</h5>
           <p class="card-text">${book.title}</p>
-          <a href="#" class="btn btn-primary">Discard</a>
+          <a href="#" class="btn btn-danger" onclick=deleteMe(event)>Discard</a>
+          <a href="#" class="btn btn-success" onclick=addToCart(event)>Add to cart</a>
         </div>
       </div>`
         myRow.appendChild(newCol)
@@ -21,6 +22,14 @@ fetch('https://striveschool-api.herokuapp.com/books')
 })
 
 
-const deleteMe = () => {
-    
+const deleteMe = (e) => {
+    e.target.closest('.col').remove()
+}
+
+const addToCart = (e) => {
+    const addedBook = e.target.parentElement.querySelector('p').innerText
+    const cart = document.getElementById('cart')
+    const newLi = document.createElement('li')
+    newLi.innerText = addedBook
+    cart.appendChild(newLi)
 }
